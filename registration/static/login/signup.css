@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+body{
+    background-image: url(http://bit.ly/2gPLxZ4);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+#background{
+    height: 100vh;
+
+    background-size: cover;
+  }
+  .bg1{
+    background: url('1.jpg');
+  }
+  .bg2{
+    background: url('2.jpg');
+  }
+  .bg3{
+    background: url('3.jpg');
+  }
+  .bg4{
+    background: url('4.jpg');
+  }
+  .bg5{
+    background: url(' 5.jpg');
+  }
+#container{
+    width: 50%;
+    height: 100%;
+    background: inherit;
+    position: absolute;
+    overflow: hidden;
+    top: 0%;
+    right:0%;
+    border-radius: 8px;
+  }
+  #container:before{
+    width: (50%)+50px;
+    height: (100%)+50px;
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    bottom: 0;
+    right: 0;
+    background: inherit;
+    box-shadow: inset 0 0 0 800px rgba(255,255,255,0.2);
+    filter: blur(10px);
+  }
+  #login{
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .in{
+    background: 0;
+    width: 400px;
+    outline: 0;
+    border: 0;
+    border-bottom: 2px solid rgba(255,255,255, 0.3);
+    margin: 20px 0;
+    padding-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(255,255,255, 0.8);
+  }
+  .submit{
+    border: 0;
+    border-radius: 8px;
+    padding-bottom: 0;
+    height: 60px;
+    align-content: center;
+    background: #df2359;
+    color: white;
+    cursor: pointer;
+    transition: all 600ms ease-in-out;
+  }
+  .submit:hover{
+    background: #C0392B;
+  }
+  .sub_log{
+    background: lightgreen;
+  }
+  .sub_log:hover{
+    background: greenyellow;
+  }
+  span a{
+    color: rgba(255,255,255, 0.8);
+  }
+  .inner-addon {
+    position: relative;
+  }
+
+  .inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+  }
+
+  .right-addon .glyphicon {
+      right: 0px;
+        top:15px;
+    }
+
+  .right-addon input { padding-right: 30px; }
+  #error_block{
+    color:white;
+  }

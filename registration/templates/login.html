@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Login</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href={% static "login/login.css"%}>
+        <script type="text/javascript" src='{% static "login/script.js" %}'></script>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
+    </head>
+    <body >
+        {% if form.errors %}
+        <p>{{form.errors }}</p>
+        {% endif %}
+        <div id="render" class="bg1">
+            <div id="background" class="bg1">
+            <div id="container">
+                <form id="login" action="" method="post">
+                {% csrf_token %}
+                <input type="text" id="username" class="in" placeholder="username" name="username" />
+                <input type="password" id="password" class="in" placeholder="password" name="password" />
+                <input type="submit" value="Login" class="in submit sub_log"/>
+                <input  type="button" value="Sign Up" class="in submit" onclick="location.href='{% url 'signup' %}'"/>
+                <span><a href="#">Forgot Password?</a></span>
+            </form>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,54 @@
+{% extends 'header.html' %}
+{% block content %}
+<center>
+<form class="form-inline my-2 my-lg-0" method="POST">
+     {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Add Item" aria-label="Search" name="item" style='width:95%;'>
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add</button>
+	  <br>
+	  <br>
+    </form>
+</center>
+	{% if messages %}
+	{% for message in messages %}
+		<div class="alert alert-warning alert-dismissable" role="alert">
+			<button class="close" data-dismiss="alert">
+			<small><sup>X</sup></small>
+			</button>
+			{{ message }}
+		</div>
+	{% endfor%}
+	{% endif %}
+{% if all_items %}
+<center>
+	<table class="table table-bordered" style='width:90%;'>
+
+	{% for things in all_items %}
+	{% if things.completed %}
+		<tr class="table-secondary">
+			<td style= 'text-decoration:line-through;'>
+			<a href="{% url 'edit' things.id %}">
+			{{ things.item }}</a>
+		    </td>
+			<td style='width:15%;'><center><a href="{% url 'uncross' things.id %}">Uncross</a></center></td>
+			<td style='width:15%;'><center><a href="{% url 'delete' things.id %}">Delete</a></center></td>
+		</tr>
+	{% else %}
+		<tr>
+			<td>
+				<a href="{% url 'edit' things.id %}">
+				{{ things.item }}
+			</a>
+		</td>
+			<td style='width:15%;'><center><a href="{% url 'cross_off' things.id %}">Cross</a></center></td>
+			<td style='width:15%;'><center><a href="{% url 'delete' things.id %}">Delete</a></center></td>
+		</tr>
+	{% endif %}	
+	{% endfor %}	
+    </table>
+</center>
+{% endif %}
+
+
+
+{% endblock %}

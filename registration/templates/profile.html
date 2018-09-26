@@ -1,0 +1,229 @@
+{% extends "header.html" %}
+{% load static %}
+
+{% block page_scripts %}
+<script>
+		window.onload = function() {
+									 Particles.init({
+											 selector: '.modular',
+											 connectParticles: true,
+											 color:['#fefefe']
+									 });
+				var modal = document.getElementById('myModal');
+			var img = document.getElementById('profile');
+			img.onclick = function(){
+					modal.style.display = "block";
+			}
+			var span = document.getElementsByClassName("close")[0];
+			span.onclick = function() { 
+					modal.style.display = "none";
+			}
+									 };
+</script>
+{% endblock %}
+{% block page_style %}
+<style>
+		body{
+				overflow-x: hidden;
+		}
+		#profile_cont{
+				width:100%;
+				height:400px;
+		}
+		#profile{
+				height:200px;
+				width:200px;
+				border-radius:50%; 
+				position: absolute;
+				top:20%;
+				left:45%;
+				cursor: pointer;
+				transition: 0.3s;
+		}
+		#name{
+				color:whitesmoke;
+				position: relative;
+				top:70%;
+				left:48%;
+		}
+		* {
+				box-sizing: border-box;
+		}
+		input[type=text], select, textarea{
+				width: 100%;
+				padding: 12px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+				resize: vertical;
+			}
+			
+			/* Style the label to display next to the inputs */
+			label {
+				padding: 12px 12px 12px 0;
+				display: inline-block;
+			}
+			
+			/* Style the submit button */
+			input[type=submit] {
+				background-color: #4CAF50;
+				color: white;
+				padding: 12px 20px;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				float: right;
+			}
+			#content-container {
+				border-radius: 5px;
+				background-color: #f2f2f2;
+				padding: 20px;
+			}
+			.col-25 {
+				float: left;
+				width: 25%;
+				margin-top: 6px;
+			}
+			.col-75 {
+				float: left;
+				width: 50%;
+				margin-top: 6px;
+			}
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			@media screen and (max-width: 600px) {
+				.col-25, .col-75, input[type=submit] {
+					width: 100%;
+					margin-top: 0;
+				}
+			}
+		
+		#profile:hover {opacity: 0.7;}
+		.modal {
+				display: none; 
+				position: fixed; 
+				z-index: 1; 
+				padding-top: 100px;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%; 
+				overflow: auto; 
+				background-color: rgb(0,0,0); 
+				background-color: rgba(0,0,0,0.9); 
+		}
+
+		.modal-content {
+				margin: auto;
+				display: block;
+				width: 80%;
+				background-color: white;
+				-webkit-animation-name: zoom;
+				-webkit-animation-duration: 0.6s;
+				animation-name: zoom;
+				animation-duration: 0.6s;
+		}
+		@-webkit-keyframes zoom {
+				from {-webkit-transform:scale(0)} 
+				to {-webkit-transform:scale(1)}
+		}
+		
+		@keyframes zoom {
+				from {transform:scale(0)} 
+				to {transform:scale(1)}
+		}
+		.close {
+				position: absolute;
+				top: 15px;
+				right: 35px;
+				color: #f1f1f1;
+				font-size: 40px;
+				font-weight: bold;
+				transition: 0.3s;
+		}
+		
+		.close:hover,
+		.close:focus {
+				color: #bbb;
+				text-decoration: none;
+				cursor: pointer;
+		}
+		@media only screen and (max-width: 700px){
+				.modal-content {
+						width: 100%;
+				}
+		}
+		#dp_upload{
+			height:200px;
+			width:200px;
+			position: relative;
+			top:10%;
+			left:40%;
+		}
+</style>
+{% endblock %}
+
+
+{% block post_nav %}
+		<div id="profile_cont">
+		<img id="profile" src="{{details.dp.url}}" >
+		<h1 id="name">{{request.user.username}}</h1>    
+		<canvas class="modular"></canvas>
+		</div>
+		<div id="myModal" class="modal">
+			<span class="close">&times;</span>
+			<div class="modal-content">
+					<img id="dp_upload" src="{{details.dp.url}}" >
+				<form method='POST' enctype="multipart/form-data" class="form-group">
+					{% csrf_token %}
+					<div style="display:none">{{profile}}</div>
+					{{profile.dp}}
+					<input type='submit' value='Update' class="btn btn-success">
+				</form>
+			</div>
+		</div>
+{% endblock %}
+
+{% block content %}
+		<form method='POST' enctype="multipart/form-data" class="form-group">
+				{% csrf_token %}
+				<div class="row">
+								<div class="col-25">
+									<label for="fname">First Name</label>
+								</div>
+								<div class="col-75">
+									<input type="text" id="fname" name="firstname" placeholder="Name"value="{{request.user.username}}">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-25">
+									<label for="ph_no">Phone number</label>
+								</div>
+								<div class="col-75">
+									{{profile.ph_no}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-25">
+									<label for="country">Gender</label>
+								</div>
+								<div class="col-75">
+									{{profile.gender}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-25">
+									<label for="subject">About me</label>
+								</div>
+								<div class="col-75">
+									{{profile.desc}}
+								</div>
+							</div>
+							<div class="row">     
+								<input type='submit' value='Update' class="btn btn-success">
+						</div>
+		</form>
+{% endblock %}
